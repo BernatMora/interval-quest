@@ -53,16 +53,15 @@ enum Interval: String, CaseIterable, Identifiable {
         case .root: return 0
         case .minorSecond, .minorNinth: return 1
         case .majorSecond, .majorNinth: return 2
-        case .minorThird: return 3
+        case .minorThird, .augmentedNinth: return 3
         case .majorThird: return 4
         case .perfectFourth, .perfectEleventh: return 5
-        case .augmentedFourth, .diminishedFifth: return 6
+        case .augmentedFourth, .diminishedFifth, .augmentedEleventh: return 6
         case .perfectFifth: return 7
         case .minorSixth, .minorThirteenth: return 8
-        case .majorSixth, .augmentedNinth, .majorThirteenth: return 9
+        case .majorSixth, .majorThirteenth: return 9
         case .minorSeventh: return 10
         case .majorSeventh: return 11
-        case .augmentedEleventh: return 6
         }
     }
     

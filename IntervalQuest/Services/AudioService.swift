@@ -39,21 +39,21 @@ class AudioService: ObservableObject {
     /// Carga el sonido de piano
     private func loadPianoSound() {
         do {
-            // Intentar cargar preset de piano
+            // Intentar cargar preset de piano personalizado si existe
             if let soundFontURL = Bundle.main.url(forResource: "piano", withExtension: "sf2") {
                 try sampler.loadSoundBankInstrument(at: soundFontURL,
                                                    program: 0,
                                                    bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
                                                    bankLSB: UInt8(kAUSampler_DefaultBankLSB))
             } else {
-                // Si no hay soundfont, usar instrumento por defecto
-                try sampler.loadInstrument(at: URL(fileURLWithPath: ""),
-                                          program: 0,
-                                          bankMSB: UInt8(kAUSampler_DefaultMelodicBankMSB),
-                                          bankLSB: UInt8(kAUSampler_DefaultBankLSB))
+                // Si no hay soundfont personalizado, usar instrumento de sistema
+                // Esto usará el preset de piano predeterminado del sistema
+                try sampler.loadPreset(AUAudioUnitPreset())
+                print("Usando preset de audio del sistema (soundfont personalizado no disponible)")
             }
         } catch {
             print("Error al cargar el sonido de piano: \(error.localizedDescription)")
+            print("El audio puede no funcionar correctamente. Considere agregar un archivo piano.sf2 al bundle.")
         }
     }
     
